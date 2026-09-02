@@ -1,0 +1,59 @@
+# 매일 07:00 KST 수집
+#
+# 저장 위치:  .github/workflows/collect.yml
+# 반드시 비공개(private) 저장소에 두세요. 공개면 수집한 데이터도 공개됩니다.
+#
+# GitHub Actions 의 cron 은 UTC 입니다. 07:00 KST = 22:00 UTC (전날).
+# 서머타임이 없는 한국 기준이라 1년 내내 그대로 두면 됩니다.
+
+name: collect
+
+on:
+  schedule:
+    - cron: "0 22 * * *"     # 매일 07:00 KST
+  workflow_dispatch:          # Actions 탭에서 손으로도 돌릴 수 있게
+
+permissions:
+  contents: write             # data.js / history.csv 를 커밋해야 하므로 필요
+
+concurrency:
+  group: collect
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install requests
+
+      - name: 수집
+        run: python collect.py
+
+      - name: 결과 커밋
+        run: |
+          if [ -z "$(git status --porcelain data.js history.csv)" ]; then
+            echo "바뀐 게 없습니다. 커밋 생략."
+            exit 0
+          fi
+          git config user.name  "toptoon-tracker"
+          git config user.email "actions@github.com"
+          git add data.js history.csv
+          git commit -m "수집 $(TZ=Asia/Seoul date '+%Y-%m-%d %H:%M')"
+          git push
+
+      - name: 로그 남기기
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: collect-log-${{ github.run_number }}
+          path: collect.log
+          retention-days: 14
+          if-no-files-found: ignore
