@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>탑툰챗 트래커</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+:root{
+  --paper:#F4F6F8; --surface:#FFFFFF; --surface2:#FAFBFC;
+  --ink:#15181E; --ink2:#59616E; --ink3:#8A93A1;
+  --rule:#DEE3EA; --rule2:#EDF0F4;
+  --up:#D2374C;      /* 한국식: 상승 = 빨강 */
+  --down:#1A5FC4;    /* 하락 = 파랑 */
+  --kr:#15181E; --jp:#BE6C1B; --cn:#2C7F62; --na:#7350AE;
+  --warn:#FDF3F4; --cool:#F1F5FC; --neutral:#F3F4F6;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:Pretendard,-apple-system,"Apple SD Gothic Neo","Malgun Gothic","맑은 고딕",sans-serif;
+  font-size:15px; line-height:1.6; letter-spacing:-.011em;
+  font-feature-settings:"tnum" 1;
+}
+.wrap{max-width:1080px; margin:0 auto; padding:0 20px 96px}
+
+/* ── 머리 ─────────────────────────────── */
+.top{display:flex; align-items:baseline; justify-content:space-between;
+  gap:16px; flex-wrap:wrap; padding:32px 0 20px; border-bottom:1px solid var(--rule)}
+h1{margin:0; font-size:19px; font-weight:700; letter-spacing:-.02em}
+h1 span{font-weight:400; color:var(--ink3); margin-left:8px; font-size:14px}
+.stamp{font-size:13px; color:var(--ink2)}
+.stamp b{font-weight:600; color:var(--ink)}
+.stale{display:none; margin-top:14px; padding:11px 14px; border-radius:6px;
+  background:var(--warn); border:1px solid #F0C9CE; color:#96202F; font-size:13.5px}
+.stale.on{display:block}
+
+/* ── 판정 (히어로) ────────────────────── */
+.verdict{margin:28px 0 8px; background:var(--surface);
+  border:1px solid var(--rule); border-radius:10px; overflow:hidden}
+.vhead{padding:22px 26px 0}
+.vlead{font-size:14px; color:var(--ink2); margin:0 0 6px}
+.vline{font-size:26px; line-height:1.35; font-weight:600; letter-spacing:-.025em; margin:0}
+.vline em{font-style:normal; padding:0 2px}
+.vline .neg{color:var(--down)} .vline .pos{color:var(--up)}
+.vsub{margin:12px 0 0; font-size:14px; color:var(--ink2); max-width:62ch}
+
+.vgrid{display:grid; grid-template-columns:repeat(4,1fr); gap:1px;
+  background:var(--rule2); margin-top:22px; border-top:1px solid var(--rule)}
+.vcell{background:var(--surface); padding:16px 20px 18px}
+.vcell .k{font-size:12.5px; color:var(--ink3); margin-bottom:5px}
+.vcell .v{font-size:23px; font-weight:650; letter-spacing:-.03em; line-height:1.2}
+.vcell .n{font-size:12px; color:var(--ink3); margin-top:4px}
+
+/* ── 조절 ─────────────────────────────── */
+.knobs{background:var(--surface2); border-top:1px solid var(--rule); padding:18px 26px 20px}
+.ktitle{font-size:12.5px; color:var(--ink3); margin-bottom:14px}
+.krow{display:grid; grid-template-columns:repeat(4,1fr); gap:22px}
+.knob label{display:block; font-size:12.5px; color:var(--ink2); margin-bottom:7px}
+.knob label b{color:var(--ink); font-weight:650; font-size:13.5px}
+input[type=range]{width:100%; accent-color:var(--ink); height:20px; cursor:pointer}
+input[type=number]{width:100%; padding:6px 9px; font:inherit; font-size:14px;
+  border:1px solid var(--rule); border-radius:5px; background:var(--surface); color:var(--ink)}
+input:focus-visible,button:focus-visible{outline:2px solid var(--down); outline-offset:2px}
+
+/* ── 섹션 ─────────────────────────────── */
+section{margin-top:44px}
+.shead{display:flex; align-items:center; gap:10px; margin-bottom:4px}
+h2{margin:0; font-size:16px; font-weight:650; letter-spacing:-.02em}
+.sig{font-size:11.5px; font-weight:600; padding:2.5px 8px; border-radius:20px; white-space:nowrap}
+.sig.bear{background:var(--cool); color:var(--down)}
+.sig.bull{background:var(--warn); color:var(--up)}
+.sig.flat{background:var(--neutral); color:var(--ink2)}
+.sdesc{margin:0 0 16px; font-size:13.5px; color:var(--ink2); max-width:78ch}
+
+.panel{background:var(--surface); border:1px solid var(--rule); border-radius:10px; padding:18px 20px}
+.panel.tight{padding:0; overflow:hidden}
+
+/* ── 지역 행 ──────────────────────────── */
+.regions{display:grid; gap:1px; background:var(--rule2);
+  border:1px solid var(--rule); border-radius:10px; overflow:hidden}
+.rrow{background:var(--surface); display:grid;
+  grid-template-columns:118px 1fr 96px 96px 104px; align-items:center; gap:12px; padding:14px 18px}
+.rname{font-weight:650; font-size:14px; display:flex; align-items:center; gap:8px}
+.dot{width:9px; height:9px; border-radius:50%; flex:none}
+.rbar{height:8px; background:var(--rule2); border-radius:4px; overflow:hidden}
+.rbar i{display:block; height:100%; border-radius:4px}
+.rnum{text-align:right; font-size:16px; font-weight:650; letter-spacing:-.02em}
+.rdelta{text-align:right; font-size:13.5px; font-weight:600}
+.rpeak{text-align:right; font-size:12.5px; color:var(--ink3)}
+.up{color:var(--up)} .down{color:var(--down)} .flatc{color:var(--ink3)}
+
+/* ── 표 ───────────────────────────────── */
+table{width:100%; border-collapse:collapse; font-size:13.5px}
+th{font-weight:600; font-size:12.5px; color:var(--ink2); text-align:right;
+  padding:11px 14px; border-bottom:1px solid var(--rule); background:var(--surface2); white-space:nowrap}
+th:first-child,td:first-child{text-align:left}
+td{padding:10px 14px; border-bottom:1px solid var(--rule2); text-align:right; white-space:nowrap}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover{background:var(--surface2)}
+td.lab{font-weight:600}
+.sub{font-size:11.5px; color:var(--ink3); font-weight:400}
+.wide{overflow-x:auto}
+
+/* ── 차트 ─────────────────────────────── */
+.chartbox{padding:6px 4px 0}
+svg{display:block; width:100%; height:auto}
+.legend{display:flex; gap:18px; flex-wrap:wrap; padding:10px 16px 14px; font-size:13px; color:var(--ink2)}
+.legend span{display:flex; align-items:center; gap:7px}
+.tabs{display:flex; gap:6px; padding:14px 16px 0}
+.tab{font:inherit; font-size:13px; padding:5px 13px; border-radius:16px; cursor:pointer;
+  border:1px solid var(--rule); background:var(--surface); color:var(--ink2)}
+.tab[aria-pressed=true]{background:var(--ink); border-color:var(--ink); color:#fff; font-weight:600}
+
+.note{font-size:12.5px; color:var(--ink3); margin-top:12px; max-width:80ch; line-height:1.65}
+.callout{margin-top:14px; padding:13px 16px; border-radius:7px; font-size:13.5px;
+  background:var(--surface2); border:1px solid var(--rule); color:var(--ink2)}
+.callout b{color:var(--ink)}
+.two{display:grid; grid-template-columns:1fr 1fr; gap:16px}
+
+/* ── 일정 ─────────────────────────────── */
+.cal{list-style:none; margin:0; padding:0}
+.cal li{display:flex; gap:16px; padding:12px 0; border-bottom:1px solid var(--rule2); font-size:13.5px}
+.cal li:last-child{border-bottom:none}
+.cal time{flex:none; width:104px; color:var(--ink3); font-size:13px}
+
+footer{margin-top:56px; padding-top:24px; border-top:1px solid var(--rule);
+  font-size:12.5px; color:var(--ink3); line-height:1.75; max-width:82ch}
+footer b{color:var(--ink2)}
+
+@media (max-width:880px){
+  .vgrid,.krow{grid-template-columns:repeat(2,1fr)}
+  .two{grid-template-columns:1fr}
+  .vline{font-size:21px}
+  .rrow{grid-template-columns:92px 1fr 78px 76px; gap:8px; padding:13px 14px}
+  .rpeak{display:none}
+  .wrap{padding:0 14px 72px}
+}
+@media (prefers-reduced-motion:no-preference){
+  .vcell .v{transition:color .18s ease}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="top">
+  <h1>탑툰챗 트래커<span>탑코미디어 · 134580</span></h1>
+  <div class="stamp">최종 수집 <b id="stamp">—</b> · 다음 실행 <b id="nextrun">—</b></div>
+</div>
+<div class="stale" id="stale"></div>
+
+<!-- 판정 -->
+<div class="verdict">
+  <div class="vhead">
+    <p class="vlead">지금 페이스가 유지되면</p>
+    <p class="vline" id="verdict">—</p>
+    <p class="vsub" id="verdictSub">—</p>
+  </div>
+  <div class="vgrid">
+    <div class="vcell"><div class="k">함의 방당 단가</div><div class="v" id="oUnit">—</div><div class="n" id="oUnitN">2분기 실적에서 역산</div></div>
+    <div class="vcell"><div class="k">3분기 증분 영업이익</div><div class="v" id="oQ3">—</div><div class="n">2분기 대비</div></div>
+    <div class="vcell"><div class="k">4분기 증분 영업이익</div><div class="v" id="oQ4">—</div><div class="n">3분기 대비</div></div>
+    <div class="vcell"><div class="k">증분 시총 ÷ 연환산 증분이익</div><div class="v" id="oMult">—</div><div class="n" id="oMultN">—</div></div>
+  </div>
+  <div class="knobs">
+    <div class="ktitle">가정을 움직여 보세요. 위 숫자가 따라 바뀝니다.</div>
+    <div class="krow">
+      <div class="knob">
+        <label>2분기 AI 매출 앵커 <b id="lAnchor"></b></label>
+        <input type="range" id="anchor" min="15" max="18.6" step="0.1" value="16.8">
+      </div>
+      <div class="knob">
+        <label>매출 인식 시차 <b id="lF"></b></label>
+        <input type="range" id="fval" min="0.6" max="1" step="0.01" value="0.95">
+      </div>
+      <div class="knob">
+        <label>증분 영업이익률 <b id="lMargin"></b></label>
+        <input type="range" id="margin" min="0.4" max="0.9" step="0.01" value="0.78">
+      </div>
+      <div class="knob">
+        <label>현재 시가총액 (억)</label>
+        <input type="number" id="mcap" step="10">
+      </div>
+    </div>
+  </div>
+</div>
+<p class="note">
+  단가는 입력이 아니라 <b>결과</b>입니다. 2분기 AI 매출 앵커를 그 분기에 귀속되는 방 수로 나눠서 나옵니다.
+  시차를 1.0 미만으로 내리면 “지난 분기에 열린 방이 이번 분기에도 돈을 쓴다”를 반영합니다.
+  1분기 방 수는 70,000개로 가정했습니다(3월 중순 출시).
+</p>
+
+<!-- 지역 -->
+<section>
+  <div class="shead"><h2>지역별 최근 주</h2><span class="sig bear" id="sigRegion">약세</span></div>
+  <p class="sdesc">막대 길이는 해당 지역의 자기 정점 대비 현재 수준입니다.</p>
+  <div class="regions" id="regions"></div>
+</section>
+
+<!-- 추이 -->
+<section>
+  <div class="shead"><h2>주간 신규 대화방</h2><span class="sig bear">약세</span></div>
+  <p class="sdesc">한국이 7월 3주에 꼭대기를 찍은 뒤 내려오고 있습니다. 일본만 올라가지만 한국이 빠지는 속도를 못 따라잡습니다.</p>
+  <div class="panel tight">
+    <div class="tabs">
+      <button class="tab" data-mode="stack" aria-pressed="true">전체 쌓기</button>
+      <button class="tab" data-mode="line" aria-pressed="false">지역별 추이</button>
+    </div>
+    <div class="chartbox"><div id="chartMain"></div></div>
+    <div class="legend">
+      <span><i class="dot" style="background:var(--kr)"></i>한국</span>
+      <span><i class="dot" style="background:var(--jp)"></i>일본</span>
+      <span><i class="dot" style="background:var(--cn)"></i>중화권</span>
+      <span><i class="dot" style="background:var(--na)"></i>북미·글로벌</span>
+    </div>
+  </div>
+</section>
+
+<!-- 일본 전환율 -->
+<section>
+  <div class="shead"><h2>일본 전환율</h2><span class="sig bull" id="sigJp">유일한 반전 후보</span></div>
+  <p class="sdesc">
+    일본은 페이지 조회가 한국의 몇 배인데 실제로 열리는 대화방은 훨씬 적습니다.
+    이게 번역·첫화면 문제라면 고치는 순간 일본이 몇 배가 되고, 웹툰 보러 왔다 실수로 눌린 트래픽이라면 일본도 곧 천장입니다.
+    <b>이 표에서 일본 줄이 올라가기 시작하는지만 보면 됩니다.</b>
+  </p>
+  <div class="panel tight wide"><table id="tblDaily"></table></div>
+  <div class="callout" id="jpCallout"></div>
+</section>
+
+<!-- 월별 -->
+<section>
+  <div class="shead"><h2>월별 추이와 매출 환산</h2><span class="sig flat">주수 보정 필요</span></div>
+  <p class="sdesc">4월과 7월은 5주, 나머지는 4주입니다. 단순 합계로 비교하면 7월→8월이 −16%로 잘못 찍힙니다. 아래는 전부 주평균 기준입니다.</p>
+  <div class="panel tight wide"><table id="tblMonthly"></table></div>
+</section>
+
+<!-- 한국 심층 -->
+<section>
+  <div class="shead"><h2>한국 — 고정 캐릭터 40명과 결제 강도</h2><span class="sig bear">약세</span></div>
+  <p class="sdesc">
+    기존캐릭터는 4월까지 나온 40명만 따로 센 값입니다. 전체가 늘어도 이게 빠지면 신규 출시로 기존 수요를 돌려막는 중이라는 뜻입니다.
+    활동·컬렉션은 상위 30명 유저가 냥을 어디에 얼마나 쓰는지 보여주는 1~5 등급으로, 결제 강도를 볼 수 있는 유일한 공개 창구입니다.
+  </p>
+  <div class="panel tight wide"><table id="tblKr"></table></div>
+  <div class="callout" id="krCallout"></div>
+</section>
+
+<!-- 콘텐츠 공급 -->
+<section>
+  <div class="shead"><h2>콘텐츠 공급</h2><span class="sig bear">선행지표</span></div>
+  <p class="sdesc">신규 캐릭터를 몇 명 넣었는지입니다. 공급을 줄인 시점과 성장이 꺾인 시점이 겹칩니다.</p>
+  <div class="panel tight wide"><table id="tblSupply"></table></div>
+</section>
+
+<!-- 상위 캐릭터 -->
+<section>
+  <div class="shead"><h2>상위 캐릭터와 회전율</h2><span class="sig flat">중립</span></div>
+  <p class="sdesc">상위권이 몇 주 만에 통째로 갈리면 고정 팬덤이 아니라 신규 출시에 수요가 끌려다니는 구조입니다.</p>
+  <div class="two">
+    <div class="panel tight wide"><table id="tblChars"></table></div>
+    <div>
+      <div class="panel tight wide"><table id="tblSnap"></table></div>
+      <div class="callout" id="snapCallout"></div>
+    </div>
+  </div>
+</section>
+
+<!-- 카탈로그 -->
+<section>
+  <div class="shead"><h2>카탈로그 크기와 상위 50 컷오프</h2><span class="sig bull">과소계상 방향</span></div>
+  <p class="sdesc">
+    4월엔 캐릭터가 40명이라 상위 50을 센다는 게 사실상 전부를 센 것이었습니다.
+    카탈로그가 커질수록 51위 아래 꼬리가 통째로 빠지므로, 최근 숫자일수록 실제보다 적게 세고 있습니다.
+  </p>
+  <div class="panel tight wide"><table id="tblCatalog"></table></div>
+  <div class="callout" id="catCallout"></div>
+</section>
+
+<!-- 일정 -->
+<section>
+  <div class="shead"><h2>확인 일정</h2><span class="sig flat">—</span></div>
+  <p class="sdesc">데이터로는 이미 꺾였지만 공시로 확인되는 건 한참 뒤입니다. 그 시차가 이 종목의 성격을 결정합니다.</p>
+  <div class="panel"><ul class="cal" id="cal"></ul></div>
+</section>
+
+<footer id="foot"></footer>
+</div>
+
+<script src="data.js"></script>
+<script>
+(function(){
+"use strict";
+const D = window.TOPTOON_DATA;
+if(!D){ document.body.innerHTML='<div class="wrap" style="padding-top:60px">data.js 를 찾지 못했습니다. dashboard.html 과 같은 폴더에 두세요.</div>'; return; }
+
+/* ── 유틸 ───────────────────────────── */
+const $ = s => document.querySelector(s);
+const n0 = v => v==null ? "—" : Math.round(v).toLocaleString("ko-KR");
+const e1 = v => v==null ? "—" : (v>=0?"":"−") + Math.abs(v).toFixed(1) + "억";
+const pc = (v,d=1) => v==null ? "—" : (v>0?"+":v<0?"−":"") + Math.abs(v*100).toFixed(d) + "%";
+const cls = v => v==null ? "flatc" : v>0.0005 ? "up" : v<-0.0005 ? "down" : "flatc";
+const esc = s => String(s).replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+const sum = a => a.reduce((x,y)=>x+(y||0),0);
+
+const REG = [
+  {k:"kr", label:"한국",        css:"var(--kr)"},
+  {k:"jp", label:"일본",        css:"var(--jp)"},
+  {k:"cn", label:"중화권",      css:"var(--cn)"},
+  {k:"na", label:"북미·글로벌", css:"var(--na)"}
+];
+const wkTotal = r => sum(REG.map(x=>r[x.k]));
+
+/* ── 상수 ───────────────────────────── */
+const Q1_ROOMS = 70000;     // 3월 중순 출시, 추정
+const Q2_ROOMS = 818956;    // 대시보드 앵커
+const Q3_ROOMS = 1323068;   // 실측 907,928 + 잔여 4주 × 8월 주평균 103,785
+const WPQ = 13;
+
+/* ── 머리 ───────────────────────────── */
+$("#stamp").textContent = D.meta.collectedAt;
+$("#nextrun").textContent = D.meta.nextRun;
+(function freshness(){
+  const t = Date.parse(D.meta.collectedAt.replace(" ","T")+":00");
+  if(isNaN(t)) return;
+  const days = (Date.now()-t)/864e5;
+  if(days > 2){
+    const el = $("#stale"); el.classList.add("on");
+    el.textContent = `데이터가 ${Math.floor(days)}일 지났습니다. 수집 작업이 멈췄는지 확인하세요 — 하루라도 건너뛰면 그날의 증분은 되살릴 수 없습니다.`;
+  }
+})();
+
+/* ── 판정 계산 ──────────────────────── */
+const lastWk = D.weekly[D.weekly.length-1];
+const exitRate = wkTotal(lastWk);
+const q4Rooms = exitRate * WPQ;
+
+function model(){
+  const anchor = +$("#anchor").value;      // 억
+  const f      = +$("#fval").value;
+  const m      = +$("#margin").value;
+  const mcap   = +$("#mcap").value;
+
+  const attrib = (cur, prev) => f*cur + (1-f)*prev;
+  const unit = (anchor*1e8) / attrib(Q2_ROOMS, Q1_ROOMS);   // 원/방 (파생값)
+
+  const rev = (cur,prev) => unit * attrib(cur,prev) / 1e8;  // 억
+  const r2 = anchor;
+  const r3 = rev(Q3_ROOMS, Q2_ROOMS);
+  const r4 = rev(q4Rooms,  Q3_ROOMS);
+
+  const op3 = (r3-r2)*m, op4 = (r4-r3)*m;
+  const dMcap = mcap - D.market.baseMarketCap;
+  const mult = op3>0 ? dMcap/(op3*4) : null;
+  return {unit,r2,r3,r4,op3,op4,dMcap,mult,f,m};
+}
+
+function render(){
+  const r = model();
+  $("#lAnchor").textContent  = (+$("#anchor").value).toFixed(1)+"억";
+  $("#lF").textContent       = (+$("#fval").value).toFixed(2);
+  $("#lMargin").textContent  = Math.round(+$("#margin").value*100)+"%";
+
+  $("#oUnit").textContent = Math.round(r.unit).toLocaleString("ko-KR")+"원";
+  $("#oUnitN").textContent = r.f<1 ? `시차 ${r.f.toFixed(2)} 반영` : "시차 미반영";
+
+  const q3 = $("#oQ3"), q4 = $("#oQ4");
+  q3.textContent = e1(r.op3); q3.className = "v " + cls(r.op3);
+  q4.textContent = e1(r.op4); q4.className = "v " + cls(r.op4);
+
+  $("#oMult").textContent = r.mult==null ? "—" : r.mult.toFixed(0)+"배";
+  $("#oMultN").textContent = `증분 시총 ${n0(r.dMcap)}억 기준`;
+
+  const dir = r.op4 > 0.5 ? "pos" : r.op4 < -0.5 ? "neg" : "";
+  $("#verdict").innerHTML =
+    `4분기 AI 매출 <em>${r.r4.toFixed(1)}억</em>, 3분기 대비 ` +
+    `<em class="${r.r4<r.r3?'neg':'pos'}">${pc(r.r4/r.r3-1)}</em>. ` +
+    `영업이익은 <em class="${dir}">${e1(r.op4)}</em> 붙습니다.`;
+
+  const verdictText = r.op4 < 0
+    ? `3분기에 붙는 ${e1(r.op3)}은 계단 한 칸이지 올라가는 경사가 아닙니다. 일본·중화권이 5월 말에 문을 열어 3분기가 첫 온전한 분기였고, 한국이 마침 7월에 정점을 찍었기 때문입니다. 둘 다 4분기엔 반복되지 않습니다.`
+    : `4분기에도 이익이 더 붙습니다. 다만 3분기 ${e1(r.op3)}에 비하면 ${(r.op4/r.op3*100).toFixed(0)}% 수준이라, 가속이 아니라 감속입니다.`;
+  $("#verdictSub").textContent =
+    `8월 4주 페이스 ${n0(exitRate)}방/주 × 13주 기준. ` + verdictText;
+  renderMonthly();
+}
+["#anchor","#fval","#margin","#mcap"].forEach(s=>$(s).addEventListener("input",render));
+$("#mcap").value = D.market.marketCap;
+
+/* ── 지역 행 ────────────────────────── */
+(function(){
+  const rows = REG.map(rg=>{
+    const series = D.weekly.map(w=>w[rg.k]).filter(v=>v!=null);
+    const cur = series[series.length-1];
+    const prev = series[series.length-2];
+    const peak = Math.max(...series);
+    const wk = D.weekly.filter(w=>w[rg.k]!=null).slice(-1)[0].w;
+    return `<div class="rrow">
+      <div class="rname"><i class="dot" style="background:${rg.css}"></i>${rg.label}
+        <span class="sub">${wk}</span></div>
+      <div class="rbar"><i style="width:${(cur/peak*100).toFixed(1)}%;background:${rg.css}"></i></div>
+      <div class="rnum">${n0(cur)}</div>
+      <div class="rdelta ${cls(cur/prev-1)}">${pc(cur/prev-1)}</div>
+      <div class="rpeak">정점比 ${pc(cur/peak-1)}</div>
+    </div>`;
+  }).join("");
+  const t = wkTotal(lastWk), peakT = Math.max(...D.weekly.map(wkTotal));
+  const prevT = wkTotal(D.weekly[D.weekly.length-2]);
+  $("#regions").innerHTML = rows + `<div class="rrow" style="background:var(--surface2)">
+      <div class="rname">합계</div>
+      <div class="rbar"><i style="width:${(t/peakT*100).toFixed(1)}%;background:var(--ink2)"></i></div>
+      <div class="rnum">${n0(t)}</div>
+      <div class="rdelta ${cls(t/prevT-1)}">${pc(t/prevT-1)}</div>
+      <div class="rpeak">정점比 ${pc(t/peakT-1)}</div>
+    </div>`;
+})();
+
+/* ── 차트 ───────────────────────────── */
+const CW=920, CH=300, PAD={t:16,r:14,b:34,l:52};
+function drawChart(mode){
+  const rows = D.weekly, N = rows.length;
+  const iw = CW-PAD.l-PAD.r, ih = CH-PAD.t-PAD.b;
+  const maxY = mode==="stack"
+    ? Math.max(...rows.map(wkTotal))
+    : Math.max(...rows.map(r=>Math.max(...REG.map(g=>r[g.k]||0))));
+  const top = Math.ceil(maxY/20000)*20000;
+  const x = i => PAD.l + (N<2?0:i*iw/(N-1));
+  const y = v => PAD.t + ih - (v/top)*ih;
+  let s = `<svg viewBox="0 0 ${CW} ${CH}" role="img" aria-label="주간 신규 대화방 추이">`;
+
+  for(let g=0; g<=top; g+=20000){
+    s += `<line x1="${PAD.l}" x2="${CW-PAD.r}" y1="${y(g).toFixed(1)}" y2="${y(g).toFixed(1)}" stroke="var(--rule2)"/>`
+       + `<text x="${PAD.l-8}" y="${(y(g)+4).toFixed(1)}" text-anchor="end" font-size="11" fill="var(--ink3)">${g/1000}k</text>`;
+  }
+  if(mode==="stack"){
+    let base = rows.map(()=>0);
+    REG.forEach(g=>{
+      const tops = rows.map((r,i)=>base[i]+(r[g.k]||0));
+      const up   = tops.map((v,i)=>`${x(i).toFixed(1)},${y(v).toFixed(1)}`).join(" ");
+      const dn   = base.map((v,i)=>`${x(N-1-i).toFixed(1)},${y(base[N-1-i]).toFixed(1)}`).join(" ");
+      s += `<polygon points="${up} ${dn}" fill="${g.css}" fill-opacity=".82"/>`;
+      base = tops;
+    });
+  } else {
+    REG.forEach(g=>{
+      const pts = rows.map((r,i)=>r[g.k]==null?null:`${x(i).toFixed(1)},${y(r[g.k]).toFixed(1)}`)
+                      .filter(Boolean).join(" ");
+      s += `<polyline points="${pts}" fill="none" stroke="${g.css}" stroke-width="2.2"
+             stroke-linejoin="round" stroke-linecap="round"/>`;
+    });
+  }
+  // 정점 표시
+  const peakI = rows.map(wkTotal).indexOf(Math.max(...rows.map(wkTotal)));
+  s += `<line x1="${x(peakI).toFixed(1)}" x2="${x(peakI).toFixed(1)}" y1="${PAD.t}" y2="${PAD.t+ih}"
+         stroke="var(--down)" stroke-width="1" stroke-dasharray="3 3"/>`
+     + `<text x="${(x(peakI)+6).toFixed(1)}" y="${PAD.t+12}" font-size="11" fill="var(--down)">정점</text>`;
+
+  rows.forEach((r,i)=>{ if(i%3===0 || i===N-1)
+    s += `<text x="${x(i).toFixed(1)}" y="${CH-12}" text-anchor="middle" font-size="11" fill="var(--ink3)">${r.w}</text>`; });
+  return s+"</svg>";
+}
+document.querySelectorAll(".tab").forEach(b=>b.addEventListener("click",()=>{
+  document.querySelectorAll(".tab").forEach(o=>o.setAttribute("aria-pressed", String(o===b)));
+  $("#chartMain").innerHTML = drawChart(b.dataset.mode);
+}));
+$("#chartMain").innerHTML = drawChart("stack");
+
+/* ── 일일 지표 ──────────────────────── */
+(function(){
+  const rows = D.daily.slice().sort((a,b)=> (b.rooms/b.views)-(a.rooms/a.views));
+  $("#tblDaily").innerHTML =
+    `<thead><tr><th>지역</th><th>날짜</th><th>새 대화방</th><th>조회</th><th>전환율</th>
+      <th>확산</th><th>상위5 비중</th></tr></thead><tbody>` +
+    rows.map(r=>`<tr><td class="lab">${esc(r.region)}</td><td>${r.d}</td>
+      <td>${n0(r.rooms)}</td><td>${n0(r.views)}</td>
+      <td><b>${(r.rooms/r.views*100).toFixed(2)}%</b></td>
+      <td>${r.spread}명</td><td>${(r.top5*100).toFixed(0)}%</td></tr>`).join("") +
+    `</tbody>`;
+  const jp = D.daily.find(r=>r.region==="일본"), kr = D.daily.find(r=>r.region==="한국");
+  if(jp&&kr){
+    const gap = (kr.rooms/kr.views)/(jp.rooms/jp.views);
+    const ifOne = jp.views*0.01;
+    $("#jpCallout").innerHTML =
+      `일본은 조회가 한국의 <b>${(jp.views/kr.views).toFixed(1)}배</b>인데 전환율은 <b>${gap.toFixed(0)}분의 1</b>입니다.
+       전환율이 1%까지만 올라와도 일본 대화방은 하루 ${n0(jp.rooms)}개에서 <b>${n0(ifOne)}개</b>가 됩니다.
+       그러면 한국이 빠지는 건 아무 문제가 안 됩니다.`;
+  }
+})();
+
+/* ── 월별 ───────────────────────────── */
+function renderMonthly(){
+  const r = model();
+  const rows = D.monthly.map((m,i)=>{
+    const tot = sum(REG.map(g=>m[g.k]));
+    const prev = i ? sum(REG.map(g=>D.monthly[i-1][g.k])) : null;
+    const rev = tot*4.33*r.unit/1e8;
+    return `<tr><td class="lab">${m.m}<span class="sub"> ${m.weeks}주</span></td>
+      ${REG.map(g=>`<td>${n0(m[g.k])}</td>`).join("")}
+      <td><b>${n0(tot)}</b></td>
+      <td class="${cls(prev?tot/prev-1:null)}">${prev?pc(tot/prev-1,0):"—"}</td>
+      <td>${rev.toFixed(1)}억</td>
+      <td style="text-align:left" class="sub">${esc(m.note)}</td></tr>`;
+  }).join("");
+  $("#tblMonthly").innerHTML =
+    `<thead><tr><th>월</th>${REG.map(g=>`<th>${g.label}</th>`).join("")}
+      <th>합계<span class="sub"> 주평균</span></th><th>전월비</th><th>월매출</th>
+      <th style="text-align:left">메모</th></tr></thead><tbody>${rows}</tbody>`;
+}
+
+/* ── 한국 심층 ──────────────────────── */
+(function(){
+  const K = D.krDeep.slice().reverse();
+  $("#tblKr").innerHTML =
+    `<thead><tr><th>주차</th><th>신규 대화방</th><th>기존캐릭터 40명</th><th>비중</th>
+      <th>활동<span class="sub"> 턴과금</span></th><th>컬렉션<span class="sub"> 앨범해금</span></th>
+      <th>신규유저</th></tr></thead><tbody>` +
+    K.map((r,i)=>{
+      const p = K[i+1];
+      return `<tr><td class="lab">${r.w}</td>
+        <td>${n0(r.rooms)} <span class="${cls(p?r.rooms/p.rooms-1:null)}">${p?pc(r.rooms/p.rooms-1,0):""}</span></td>
+        <td>${n0(r.legacy)}</td><td>${(r.legacy/r.rooms*100).toFixed(0)}%</td>
+        <td>${r.act.toFixed(1)}</td><td>${r.coll.toFixed(1)}</td>
+        <td>${r.newUser}/30</td></tr>`;
+    }).join("") + `</tbody>`;
+
+  const cur = D.krDeep[D.krDeep.length-1];
+  const pk = k => Math.max(...D.krDeep.map(r=>r[k]));
+  $("#krCallout").innerHTML =
+    `정점 대비 — 대화방 <b class="${cls(cur.rooms/pk("rooms")-1)}">${pc(cur.rooms/pk("rooms")-1,0)}</b>,
+     기존캐릭터 <b class="${cls(cur.legacy/pk("legacy")-1)}">${pc(cur.legacy/pk("legacy")-1,0)}</b>,
+     활동 <b class="${cls(cur.act/pk("act")-1)}">${pc(cur.act/pk("act")-1,0)}</b>,
+     컬렉션 <b class="${cls(cur.coll/pk("coll")-1)}">${pc(cur.coll/pk("coll")-1,0)}</b>.
+     결제 강도가 방 수보다 빨리 빠지고 있습니다. 이게 계속되면 방당 단가가 내려가고, 매출은 방 수가 주는 것보다 더 크게 빠집니다.`;
+})();
+
+/* ── 콘텐츠 공급 ────────────────────── */
+(function(){
+  $("#tblSupply").innerHTML =
+    `<thead><tr><th>월</th>${REG.map(g=>`<th>${g.label}</th>`).join("")}<th>합계</th><th>전월비</th>
+      <th style="text-align:left">메모</th></tr></thead><tbody>` +
+    D.supply.map((s,i)=>{
+      const t = sum(REG.map(g=>s[g.k])), p = i? sum(REG.map(g=>D.supply[i-1][g.k])):null;
+      return `<tr><td class="lab">${s.m}</td>${REG.map(g=>`<td>${n0(s[g.k])}</td>`).join("")}
+        <td><b>${t}</b></td><td class="${cls(p?t/p-1:null)}">${p?pc(t/p-1,0):"—"}</td>
+        <td style="text-align:left" class="sub">${esc(s.note)}</td></tr>`;
+    }).join("") + `</tbody>`;
+})();
+
+/* ── 상위 캐릭터 ────────────────────── */
+(function(){
+  $("#tblChars").innerHTML =
+    `<thead><tr><th>지역</th><th>캐릭터</th><th>활동지수</th><th>전주비</th><th>순위</th></tr></thead><tbody>` +
+    D.topChars.map((c,i)=>{
+      const first = i===0 || D.topChars[i-1].region!==c.region;
+      return `<tr><td class="lab">${first?esc(c.region)+`<span class="sub"> ${c.w}</span>`:""}</td>
+        <td style="text-align:left">${c.rank}. ${esc(c.name)}</td>
+        <td>${n0(c.score)}</td><td class="${cls(c.wow)}">${c.wow==null?"—":pc(c.wow,0)}</td>
+        <td>${esc(c.move)}</td></tr>`;
+    }).join("") + `</tbody>`;
+
+  const S = D.rankSnapshot;
+  const wkTop = D.topChars.filter(c=>c.region==="한국").map(c=>c.name);
+  $("#tblSnap").innerHTML =
+    `<thead><tr><th>실시간 상위 12<span class="sub"> ${S.d}</span></th><th>유형</th><th>주간 상위5</th></tr></thead><tbody>` +
+    S.items.slice(0,12).map(it=>`<tr>
+      <td class="lab" style="text-align:left">${it.rank}. ${esc(it.name)}</td>
+      <td>${it.type==="multi"?"멀티챗":"캐릭터"}</td>
+      <td>${wkTop.includes(it.name)?"○":"—"}</td></tr>`).join("") + `</tbody>`;
+
+  const overlap = S.items.slice(0,12).filter(it=>wkTop.includes(it.name)).length;
+  const multi = S.items.slice(0,12).filter(it=>it.type==="multi").length;
+  $("#snapCallout").innerHTML =
+    `8월 4주 한국 상위 5 중 지금도 실시간 상위 12에 남아 있는 건 <b>${overlap}개</b>입니다.
+     그리고 실시간 상위 12에 <b>멀티챗 ${multi}개</b>가 들어왔습니다 — 8월 데이터엔 아예 없던 신규 상품이라
+     효과를 아직 알 수 없습니다. 꺾인 곡선을 되돌릴 후보 중 하나입니다.`;
+})();
+
+/* ── 카탈로그 ───────────────────────── */
+(function(){
+  $("#tblCatalog").innerHTML =
+    `<thead><tr><th>시점</th><th>캐릭터 수</th><th>상위50이 차지하는 비율</th>
+      <th style="text-align:left">메모</th></tr></thead><tbody>` +
+    D.catalog.map(c=>`<tr><td class="lab">${c.d}</td><td>${n0(c.chars)}</td>
+      <td>${Math.min(100, 50/c.chars*100).toFixed(0)}%</td>
+      <td style="text-align:left" class="sub">${esc(c.note)}</td></tr>`).join("") + `</tbody>`;
+
+  const a = D.catalog[0], b = D.catalog[D.catalog.length-1];
+  const kr = D.daily.find(r=>r.region==="한국");
+  $("#catCallout").innerHTML =
+    `캐릭터가 ${a.chars}개에서 ${b.chars}개로 늘었습니다. 앵커인 2분기는 컷오프 편향이 거의 없고,
+     지금은 상당한 꼬리를 놓치고 있습니다 — <b>즉 최근 숫자는 실제보다 적게 세어져 있습니다.</b>
+     다만 한국 상위 5개가 전체의 ${kr?Math.round(kr.top5*100):"—"}%를 먹을 만큼 쏠려 있어서,
+     51위 아래가 실제로 가져가는 몫은 크지 않을 가능성이 높습니다.`;
+})();
+
+/* ── 일정 ───────────────────────────── */
+$("#cal").innerHTML = D.calendar.map(c=>
+  `<li><time>${c.d}</time><span>${esc(c.label)}</span></li>`).join("");
+
+/* ── 각주 ───────────────────────────── */
+$("#foot").innerHTML =
+  `<b>이 숫자가 무엇인지</b> — 지역별 랭킹의 상위 50 캐릭터 활동지수 합입니다. 서비스 전체가 아니라 상위 구간만입니다.
+   활동지수는 누적값이라, 매일 스냅샷을 떠서 어제와 빼야 “그날 새로 열린 방”이 나옵니다.
+   하루를 건너뛰면 그 구간은 되살릴 수 없습니다.<br>
+   <b>단가</b> — 회사가 공시한 값이 아니라 2분기 실적에서 역산한 추정치입니다. AI 매출 안에 웹툰 관련 매출이 섞여 있으면 과대,
+   반대로 채팅하다 원작 웹툰을 결제한 금액은 웹툰 매출로 빠져나가므로 과소입니다. 둘 다 측정할 방법이 없습니다.<br>
+   <b>증분 영업이익률</b> — 검증 불가능한 가정입니다. 기존 웹툰 플랫폼과 인프라를 공유한다고 보고 잡은 값이니 반드시 흔들어 보세요.<br>
+   <b>가장 큰 한계</b> — 단가를 아무리 정교하게 다듬어도 대부분은 전 분기에 똑같이 곱해지는 배율이라 결론의 부호를 못 바꿉니다.
+   부호를 바꾸는 건 방 수가 다시 늘기 시작하는 것 하나뿐입니다.<br>
+   <b>${D.meta.source}</b> · 이 대시보드는 데이터 정리 도구이며 투자 권유가 아닙니다.`;
+
+render();
+})();
+</script>
+</body>
+</html>
