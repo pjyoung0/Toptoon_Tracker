@@ -1,10 +1,10 @@
 /* 탑툰챗 트래커 데이터 — collect.py 자동 생성.
- * 마지막 갱신 2026-09-03 23:40
+ * 마지막 갱신 2026-09-04 23:33
  * 과거 주간·월별 값은 손으로 넣은 그대로 보존됩니다.
  */
 window.TOPTOON_DATA = {
   "meta": {
-    "collectedAt": "2026-09-03 23:40",
+    "collectedAt": "2026-09-04 23:33",
     "source": "탑툰챗 랭킹 (지역별 상위 50 활동지수 합) — 캡처본에서 수기 이관",
     "nextRun": "매일 07:00",
     "generatedBy": "collect.py v2"
@@ -221,36 +221,36 @@ window.TOPTOON_DATA = {
   ],
   "daily": [
     {
-      "d": "2026-09-03",
+      "d": "2026-09-04",
       "region": "북미·글로벌",
-      "rooms": 15,
+      "rooms": 27,
       "views": 925,
       "spread": 53,
       "top5": 0.3,
       "legacy": 127
     },
     {
-      "d": "2026-09-03",
+      "d": "2026-09-04",
       "region": "일본",
-      "rooms": 261,
+      "rooms": 149,
       "views": 659175,
       "spread": 77,
       "top5": 0.41,
       "legacy": 1680
     },
     {
-      "d": "2026-09-03",
+      "d": "2026-09-04",
       "region": "중화권",
-      "rooms": 47,
+      "rooms": 42,
       "views": 14017,
       "spread": 64,
       "top5": 0.44,
       "legacy": 465
     },
     {
-      "d": "2026-09-03",
+      "d": "2026-09-04",
       "region": "한국",
-      "rooms": 471,
+      "rooms": 353,
       "views": 181494,
       "spread": 90,
       "top5": 0.51,
@@ -562,38 +562,38 @@ window.TOPTOON_DATA = {
     }
   ],
   "rankSnapshot": {
-    "d": "2026-09-03",
+    "d": "2026-09-04",
     "region": "한국",
-    "maxCharId": 348,
+    "maxCharId": 522,
     "items": [
       {
         "rank": 1,
+        "name": "금보라",
+        "id": 522,
+        "type": "character"
+      },
+      {
+        "rank": 2,
         "name": "일진녀들과 무인도에서 살아남기",
         "id": 101,
         "type": "multi"
       },
       {
-        "rank": 2,
+        "rank": 3,
         "name": "엄자영",
         "id": 139,
         "type": "character"
       },
       {
-        "rank": 3,
-        "name": "윤가람",
-        "id": 348,
-        "type": "character"
-      },
-      {
         "rank": 4,
-        "name": "강수연",
-        "id": 2,
+        "name": "서혜정",
+        "id": 260,
         "type": "character"
       },
       {
         "rank": 5,
-        "name": "한유라",
-        "id": 314,
+        "name": "장선영",
+        "id": 100,
         "type": "character"
       },
       {
@@ -604,62 +604,62 @@ window.TOPTOON_DATA = {
       },
       {
         "rank": 7,
-        "name": "한나리",
-        "id": 61,
-        "type": "character"
-      },
-      {
-        "rank": 8,
-        "name": "장선영",
-        "id": 100,
-        "type": "character"
-      },
-      {
-        "rank": 9,
-        "name": "한가영",
-        "id": 176,
-        "type": "character"
-      },
-      {
-        "rank": 10,
         "name": "회귀한 색마는 정파 후기지수가 되었다",
         "id": 6,
         "type": "multi"
       },
       {
+        "rank": 8,
+        "name": "윤가람",
+        "id": 348,
+        "type": "character"
+      },
+      {
+        "rank": 9,
+        "name": "한유라",
+        "id": 314,
+        "type": "character"
+      },
+      {
+        "rank": 10,
+        "name": "한나리",
+        "id": 61,
+        "type": "character"
+      },
+      {
         "rank": 11,
-        "name": "박채원",
-        "id": 118,
-        "type": "character"
-      },
-      {
-        "rank": 12,
-        "name": "오유리",
-        "id": 284,
-        "type": "character"
-      },
-      {
-        "rank": 13,
-        "name": "서민희",
-        "id": 119,
-        "type": "character"
-      },
-      {
-        "rank": 14,
-        "name": "한서현",
-        "id": 265,
-        "type": "character"
-      },
-      {
-        "rank": 15,
         "name": "김고은",
         "id": 133,
         "type": "character"
       },
       {
+        "rank": 12,
+        "name": "박채원",
+        "id": 118,
+        "type": "character"
+      },
+      {
+        "rank": 13,
+        "name": "오유리",
+        "id": 284,
+        "type": "character"
+      },
+      {
+        "rank": 14,
+        "name": "박다영",
+        "id": 70,
+        "type": "character"
+      },
+      {
+        "rank": 15,
+        "name": "김민지",
+        "id": 256,
+        "type": "character"
+      },
+      {
         "rank": 16,
-        "name": "베르디아",
-        "id": 80,
+        "name": "한가영",
+        "id": 176,
         "type": "character"
       },
       {
@@ -670,44 +670,44 @@ window.TOPTOON_DATA = {
       },
       {
         "rank": 18,
-        "name": "고유미",
-        "id": 258,
-        "type": "character"
-      },
-      {
-        "rank": 19,
-        "name": "박다영",
-        "id": 70,
-        "type": "character"
-      },
-      {
-        "rank": 20,
         "name": "조민주",
         "id": 292,
         "type": "character"
       },
       {
+        "rank": 19,
+        "name": "조미경",
+        "id": 99,
+        "type": "character"
+      },
+      {
+        "rank": 20,
+        "name": "한가연",
+        "id": 299,
+        "type": "character"
+      },
+      {
         "rank": 21,
-        "name": "백가인",
-        "id": 177,
+        "name": "박유미",
+        "id": 249,
         "type": "character"
       },
       {
         "rank": 22,
+        "name": "서민희",
+        "id": 119,
+        "type": "character"
+      },
+      {
+        "rank": 23,
         "name": "정은애",
         "id": 221,
         "type": "character"
       },
       {
-        "rank": 23,
-        "name": "차진희",
-        "id": 291,
-        "type": "character"
-      },
-      {
         "rank": 24,
-        "name": "이지연",
-        "id": 182,
+        "name": "고유미",
+        "id": 258,
         "type": "character"
       },
       {
@@ -718,164 +718,152 @@ window.TOPTOON_DATA = {
       },
       {
         "rank": 26,
-        "name": "박유미",
-        "id": 249,
-        "type": "character"
-      },
-      {
-        "rank": 27,
         "name": "최진희",
         "id": 329,
         "type": "character"
       },
       {
+        "rank": 27,
+        "name": "차진희",
+        "id": 291,
+        "type": "character"
+      },
+      {
         "rank": 28,
-        "name": "오다현",
-        "id": 228,
+        "name": "김지민",
+        "id": 296,
         "type": "character"
       },
       {
         "rank": 29,
+        "name": "이지연",
+        "id": 182,
+        "type": "character"
+      },
+      {
+        "rank": 30,
         "name": "허유희",
         "id": 74,
         "type": "character"
       },
       {
-        "rank": 30,
-        "name": "도지유",
-        "id": 146,
-        "type": "character"
-      },
-      {
         "rank": 31,
-        "name": "정고은",
-        "id": 96,
-        "type": "character"
-      },
-      {
-        "rank": 32,
-        "name": "유정원",
-        "id": 229,
-        "type": "character"
-      },
-      {
-        "rank": 33,
-        "name": "피오나",
-        "id": 317,
-        "type": "character"
-      },
-      {
-        "rank": 34,
-        "name": "서도연",
-        "id": 170,
-        "type": "character"
-      },
-      {
-        "rank": 35,
-        "name": "정소은",
-        "id": 132,
-        "type": "character"
-      },
-      {
-        "rank": 36,
-        "name": "김란",
-        "id": 134,
-        "type": "character"
-      },
-      {
-        "rank": 37,
-        "name": "서나리",
-        "id": 73,
-        "type": "character"
-      },
-      {
-        "rank": 38,
-        "name": "서미나",
-        "id": 77,
-        "type": "character"
-      },
-      {
-        "rank": 39,
-        "name": "배현주",
-        "id": 76,
-        "type": "character"
-      },
-      {
-        "rank": 40,
-        "name": "홍단비",
-        "id": 248,
-        "type": "character"
-      },
-      {
-        "rank": 41,
-        "name": "김민지",
-        "id": 256,
-        "type": "character"
-      },
-      {
-        "rank": 42,
-        "name": "이예린",
-        "id": 72,
-        "type": "character"
-      },
-      {
-        "rank": 43,
-        "name": "주서윤",
-        "id": 268,
-        "type": "character"
-      },
-      {
-        "rank": 44,
-        "name": "한유리",
-        "id": 253,
-        "type": "character"
-      },
-      {
-        "rank": 45,
         "name": "김가을",
         "id": 71,
         "type": "character"
       },
       {
-        "rank": 46,
-        "name": "은혜",
-        "id": 129,
+        "rank": 32,
+        "name": "곽도임",
+        "id": 154,
         "type": "character"
       },
       {
-        "rank": 47,
-        "name": "나연아",
-        "id": 261,
+        "rank": 33,
+        "name": "이다미",
+        "id": 297,
         "type": "character"
       },
       {
-        "rank": 48,
-        "name": "유세하",
-        "id": 78,
+        "rank": 34,
+        "name": "주서윤",
+        "id": 268,
         "type": "character"
       },
       {
-        "rank": 49,
+        "rank": 35,
+        "name": "박소민",
+        "id": 290,
+        "type": "character"
+      },
+      {
+        "rank": 36,
         "name": "도예은",
         "id": 262,
         "type": "character"
       },
       {
+        "rank": 37,
+        "name": "이예린",
+        "id": 72,
+        "type": "character"
+      },
+      {
+        "rank": 38,
+        "name": "베르디아",
+        "id": 80,
+        "type": "character"
+      },
+      {
+        "rank": 39,
+        "name": "백가인",
+        "id": 177,
+        "type": "character"
+      },
+      {
+        "rank": 40,
+        "name": "유정원",
+        "id": 229,
+        "type": "character"
+      },
+      {
+        "rank": 41,
+        "name": "서도연",
+        "id": 170,
+        "type": "character"
+      },
+      {
+        "rank": 42,
+        "name": "한서현",
+        "id": 265,
+        "type": "character"
+      },
+      {
+        "rank": 43,
+        "name": "서미나",
+        "id": 77,
+        "type": "character"
+      },
+      {
+        "rank": 44,
+        "name": "정소은",
+        "id": 132,
+        "type": "character"
+      },
+      {
+        "rank": 45,
+        "name": "유세하",
+        "id": 78,
+        "type": "character"
+      },
+      {
+        "rank": 46,
+        "name": "박민아",
+        "id": 94,
+        "type": "character"
+      },
+      {
+        "rank": 47,
+        "name": "김윤아",
+        "id": 169,
+        "type": "character"
+      },
+      {
+        "rank": 48,
+        "name": "이미예",
+        "id": 226,
+        "type": "character"
+      },
+      {
+        "rank": 49,
+        "name": "나연아",
+        "id": 261,
+        "type": "character"
+      },
+      {
         "rank": 50,
-        "name": "차미아",
-        "id": 235,
-        "type": "character"
-      },
-      {
-        "rank": 51,
-        "name": "레이",
-        "id": 130,
-        "type": "character"
-      },
-      {
-        "rank": 52,
-        "name": "조미경",
-        "id": 99,
+        "name": "배현주",
+        "id": 76,
         "type": "character"
       }
     ]
@@ -894,6 +882,11 @@ window.TOPTOON_DATA = {
     {
       "d": "2026-09-03",
       "chars": 348,
+      "note": "랭킹 페이지 최대 캐릭터 ID 기준 (하한값)"
+    },
+    {
+      "d": "2026-09-04",
+      "chars": 522,
       "note": "랭킹 페이지 최대 캐릭터 ID 기준 (하한값)"
     }
   ],
