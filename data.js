@@ -1,10 +1,10 @@
 /* 탑툰챗 트래커 데이터 — collect.py 자동 생성.
- * 마지막 갱신 2026-09-16 23:57
+ * 마지막 갱신 2026-09-17 23:47
  * 과거 주간·월별 값은 손으로 넣은 그대로 보존됩니다.
  */
 window.TOPTOON_DATA = {
   "meta": {
-    "collectedAt": "2026-09-16 23:57",
+    "collectedAt": "2026-09-17 23:47",
     "source": "탑툰챗 랭킹 (지역별 상위 50 활동지수 합) — 캡처본에서 수기 이관",
     "nextRun": "매일 07:00",
     "generatedBy": "collect.py v2"
@@ -221,36 +221,36 @@ window.TOPTOON_DATA = {
   ],
   "daily": [
     {
-      "d": "2026-09-16",
+      "d": "2026-09-17",
       "region": "북미·글로벌",
-      "rooms": 16,
+      "rooms": 21,
       "views": 925,
       "spread": 53,
       "top5": 0.3,
       "legacy": 127
     },
     {
-      "d": "2026-09-16",
+      "d": "2026-09-17",
       "region": "일본",
-      "rooms": 169,
+      "rooms": 199,
       "views": 659175,
       "spread": 77,
       "top5": 0.41,
       "legacy": 1680
     },
     {
-      "d": "2026-09-16",
+      "d": "2026-09-17",
       "region": "중화권",
-      "rooms": 31,
+      "rooms": 42,
       "views": 14017,
       "spread": 64,
       "top5": 0.44,
       "legacy": 465
     },
     {
-      "d": "2026-09-16",
+      "d": "2026-09-17",
       "region": "한국",
-      "rooms": 302,
+      "rooms": 340,
       "views": 181494,
       "spread": 90,
       "top5": 0.51,
@@ -562,20 +562,20 @@ window.TOPTOON_DATA = {
     }
   ],
   "rankSnapshot": {
-    "d": "2026-09-16",
+    "d": "2026-09-17",
     "region": "한국",
-    "maxCharId": 508,
+    "maxCharId": 10000022,
     "items": [
       {
         "rank": 1,
-        "name": "멸망한 세계의 암컷 조련사",
-        "id": 109,
-        "type": "multi"
+        "name": "윤혜린",
+        "id": 10000018,
+        "type": "character"
       },
       {
         "rank": 2,
-        "name": "연하늘",
-        "id": 165,
+        "name": "도를 아십니까?",
+        "id": 10000021,
         "type": "character"
       },
       {
@@ -586,272 +586,272 @@ window.TOPTOON_DATA = {
       },
       {
         "rank": 4,
-        "name": "김고은",
-        "id": 133,
+        "name": "연하늘",
+        "id": 165,
         "type": "character"
       },
       {
         "rank": 5,
-        "name": "성유나",
-        "id": 227,
-        "type": "character"
+        "name": "멸망한 세계의 암컷 조련사",
+        "id": 109,
+        "type": "multi"
       },
       {
         "rank": 6,
-        "name": "신아영",
-        "id": 1,
-        "type": "character"
-      },
-      {
-        "rank": 7,
-        "name": "장선영",
-        "id": 100,
-        "type": "character"
-      },
-      {
-        "rank": 8,
-        "name": "한나리",
-        "id": 61,
-        "type": "character"
-      },
-      {
-        "rank": 9,
-        "name": "조미경",
-        "id": 99,
-        "type": "character"
-      },
-      {
-        "rank": 10,
-        "name": "이소희",
-        "id": 240,
-        "type": "character"
-      },
-      {
-        "rank": 11,
         "name": "한유라",
         "id": 314,
         "type": "character"
       },
       {
-        "rank": 12,
-        "name": "은혜",
-        "id": 129,
+        "rank": 7,
+        "name": "만질 수 있는 도쿄 처녀귀신",
+        "id": 10000020,
         "type": "character"
       },
       {
-        "rank": 13,
-        "name": "일진녀들과 무인도에서 살아남기",
-        "id": 101,
-        "type": "multi"
-      },
-      {
-        "rank": 14,
-        "name": "한가영",
-        "id": 176,
+        "rank": 8,
+        "name": "김고은",
+        "id": 133,
         "type": "character"
       },
       {
-        "rank": 15,
-        "name": "조민주",
-        "id": 292,
+        "rank": 9,
+        "name": "송예진",
+        "id": 10000019,
         "type": "character"
       },
       {
-        "rank": 16,
-        "name": "박다영",
-        "id": 70,
+        "rank": 10,
+        "name": "신아영",
+        "id": 1,
         "type": "character"
       },
       {
-        "rank": 17,
-        "name": "박채원",
-        "id": 118,
-        "type": "character"
-      },
-      {
-        "rank": 18,
-        "name": "박유미",
-        "id": 249,
-        "type": "character"
-      },
-      {
-        "rank": 19,
-        "name": "밀프 아일랜드 우리 아내는 안 넘어갑니다",
-        "id": 105,
-        "type": "multi"
-      },
-      {
-        "rank": 20,
-        "name": "서도연",
-        "id": 170,
-        "type": "character"
-      },
-      {
-        "rank": 21,
-        "name": "홍단비",
-        "id": 248,
-        "type": "character"
-      },
-      {
-        "rank": 22,
-        "name": "유소희",
-        "id": 347,
-        "type": "character"
-      },
-      {
-        "rank": 23,
-        "name": "곽도임",
-        "id": 154,
-        "type": "character"
-      },
-      {
-        "rank": 24,
-        "name": "강수연",
-        "id": 2,
-        "type": "character"
-      },
-      {
-        "rank": 25,
-        "name": "박소민",
-        "id": 290,
-        "type": "character"
-      },
-      {
-        "rank": 26,
-        "name": "고유미",
-        "id": 258,
-        "type": "character"
-      },
-      {
-        "rank": 27,
-        "name": "배현주",
-        "id": 76,
-        "type": "character"
-      },
-      {
-        "rank": 28,
-        "name": "다희",
-        "id": 315,
-        "type": "character"
-      },
-      {
-        "rank": 29,
-        "name": "레이",
-        "id": 130,
-        "type": "character"
-      },
-      {
-        "rank": 30,
-        "name": "정은애",
-        "id": 221,
-        "type": "character"
-      },
-      {
-        "rank": 31,
-        "name": "차미아",
-        "id": 235,
-        "type": "character"
-      },
-      {
-        "rank": 32,
-        "name": "정소은",
-        "id": 132,
-        "type": "character"
-      },
-      {
-        "rank": 33,
-        "name": "이예린",
-        "id": 72,
-        "type": "character"
-      },
-      {
-        "rank": 34,
-        "name": "차진희",
-        "id": 291,
-        "type": "character"
-      },
-      {
-        "rank": 35,
-        "name": "이지연",
-        "id": 182,
-        "type": "character"
-      },
-      {
-        "rank": 36,
-        "name": "서나리",
-        "id": 73,
-        "type": "character"
-      },
-      {
-        "rank": 37,
-        "name": "구조선 도착까지, 앞으로 93년",
-        "id": 106,
-        "type": "multi"
-      },
-      {
-        "rank": 38,
-        "name": "한서현",
-        "id": 265,
-        "type": "character"
-      },
-      {
-        "rank": 39,
-        "name": "이미예",
-        "id": 226,
-        "type": "character"
-      },
-      {
-        "rank": 40,
-        "name": "서미나",
-        "id": 77,
-        "type": "character"
-      },
-      {
-        "rank": 41,
-        "name": "피오나",
-        "id": 317,
-        "type": "character"
-      },
-      {
-        "rank": 42,
-        "name": "서민희",
-        "id": 119,
-        "type": "character"
-      },
-      {
-        "rank": 43,
-        "name": "김가을",
-        "id": 71,
-        "type": "character"
-      },
-      {
-        "rank": 44,
-        "name": "유세하",
-        "id": 78,
-        "type": "character"
-      },
-      {
-        "rank": 45,
-        "name": "한가연",
-        "id": 299,
-        "type": "character"
-      },
-      {
-        "rank": 46,
+        "rank": 11,
         "name": "주서윤",
         "id": 268,
         "type": "character"
       },
       {
-        "rank": 47,
-        "name": "회귀한 색마는 정파 후기지수가 되었다",
-        "id": 6,
+        "rank": 12,
+        "name": "한여울",
+        "id": 10000022,
+        "type": "character"
+      },
+      {
+        "rank": 13,
+        "name": "한나리",
+        "id": 61,
+        "type": "character"
+      },
+      {
+        "rank": 14,
+        "name": "오유리",
+        "id": 284,
+        "type": "character"
+      },
+      {
+        "rank": 15,
+        "name": "고유미",
+        "id": 258,
+        "type": "character"
+      },
+      {
+        "rank": 16,
+        "name": "조미경",
+        "id": 99,
+        "type": "character"
+      },
+      {
+        "rank": 17,
+        "name": "정은애",
+        "id": 221,
+        "type": "character"
+      },
+      {
+        "rank": 18,
+        "name": "박다영",
+        "id": 70,
+        "type": "character"
+      },
+      {
+        "rank": 19,
+        "name": "일진녀들과 무인도에서 살아남기",
+        "id": 101,
         "type": "multi"
       },
       {
+        "rank": 20,
+        "name": "이소희",
+        "id": 240,
+        "type": "character"
+      },
+      {
+        "rank": 21,
+        "name": "장선영",
+        "id": 100,
+        "type": "character"
+      },
+      {
+        "rank": 22,
+        "name": "한유리",
+        "id": 253,
+        "type": "character"
+      },
+      {
+        "rank": 23,
+        "name": "엄자영",
+        "id": 139,
+        "type": "character"
+      },
+      {
+        "rank": 24,
+        "name": "조민주",
+        "id": 292,
+        "type": "character"
+      },
+      {
+        "rank": 25,
+        "name": "박채원",
+        "id": 118,
+        "type": "character"
+      },
+      {
+        "rank": 26,
+        "name": "밀프 아일랜드 우리 아내는 안 넘어갑니다",
+        "id": 105,
+        "type": "multi"
+      },
+      {
+        "rank": 27,
+        "name": "다희",
+        "id": 315,
+        "type": "character"
+      },
+      {
+        "rank": 28,
+        "name": "차수민",
+        "id": 97,
+        "type": "character"
+      },
+      {
+        "rank": 29,
+        "name": "김지민",
+        "id": 296,
+        "type": "character"
+      },
+      {
+        "rank": 30,
+        "name": "은혜",
+        "id": 129,
+        "type": "character"
+      },
+      {
+        "rank": 31,
+        "name": "도지유",
+        "id": 146,
+        "type": "character"
+      },
+      {
+        "rank": 32,
+        "name": "박유미",
+        "id": 249,
+        "type": "character"
+      },
+      {
+        "rank": 33,
+        "name": "금보라",
+        "id": 522,
+        "type": "character"
+      },
+      {
+        "rank": 34,
+        "name": "구조선 도착까지, 앞으로 93년",
+        "id": 106,
+        "type": "multi"
+      },
+      {
+        "rank": 35,
+        "name": "유달리",
+        "id": 89,
+        "type": "character"
+      },
+      {
+        "rank": 36,
+        "name": "성유나",
+        "id": 227,
+        "type": "character"
+      },
+      {
+        "rank": 37,
+        "name": "차미아",
+        "id": 235,
+        "type": "character"
+      },
+      {
+        "rank": 38,
+        "name": "오다현",
+        "id": 228,
+        "type": "character"
+      },
+      {
+        "rank": 39,
+        "name": "백가인",
+        "id": 177,
+        "type": "character"
+      },
+      {
+        "rank": 40,
+        "name": "차진희",
+        "id": 291,
+        "type": "character"
+      },
+      {
+        "rank": 41,
+        "name": "도예은",
+        "id": 262,
+        "type": "character"
+      },
+      {
+        "rank": 42,
+        "name": "서우진",
+        "id": 264,
+        "type": "character"
+      },
+      {
+        "rank": 43,
+        "name": "유소희",
+        "id": 347,
+        "type": "character"
+      },
+      {
+        "rank": 44,
+        "name": "김가을",
+        "id": 71,
+        "type": "character"
+      },
+      {
+        "rank": 45,
+        "name": "서도연",
+        "id": 170,
+        "type": "character"
+      },
+      {
+        "rank": 46,
+        "name": "김지현",
+        "id": 121,
+        "type": "character"
+      },
+      {
+        "rank": 47,
+        "name": "정고은",
+        "id": 96,
+        "type": "character"
+      },
+      {
         "rank": 48,
-        "name": "나연아",
-        "id": 261,
+        "name": "한가영",
+        "id": 176,
         "type": "character"
       },
       {
@@ -862,8 +862,8 @@ window.TOPTOON_DATA = {
       },
       {
         "rank": 50,
-        "name": "최고은",
-        "id": 303,
+        "name": "서나리",
+        "id": 73,
         "type": "character"
       }
     ]
@@ -942,6 +942,11 @@ window.TOPTOON_DATA = {
     {
       "d": "2026-09-16",
       "chars": 508,
+      "note": "랭킹 페이지 최대 캐릭터 ID 기준 (하한값)"
+    },
+    {
+      "d": "2026-09-17",
+      "chars": 10000022,
       "note": "랭킹 페이지 최대 캐릭터 ID 기준 (하한값)"
     }
   ],
