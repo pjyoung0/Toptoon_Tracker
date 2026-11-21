@@ -1,10 +1,10 @@
 /* 탑툰챗 트래커 데이터 — collect.py 자동 생성.
- * 마지막 갱신 2026-11-20 02:44
+ * 마지막 갱신 2026-11-21 02:54
  * 과거 주간·월별 값은 손으로 넣은 그대로 보존됩니다.
  */
 window.TOPTOON_DATA = {
   "meta": {
-    "collectedAt": "2026-11-20 02:44",
+    "collectedAt": "2026-11-21 02:54",
     "source": "탑툰챗 랭킹 (지역별 상위 50 활동지수 합) — 캡처본에서 수기 이관",
     "nextRun": "매일 07:00",
     "generatedBy": "collect.py v2"
@@ -221,36 +221,36 @@ window.TOPTOON_DATA = {
   ],
   "daily": [
     {
-      "d": "2026-11-20",
+      "d": "2026-11-21",
       "region": "북미·글로벌",
-      "rooms": 11,
+      "rooms": 7,
       "views": 925,
       "spread": 53,
       "top5": 0.3,
       "legacy": 127
     },
     {
-      "d": "2026-11-20",
+      "d": "2026-11-21",
       "region": "일본",
-      "rooms": 291,
+      "rooms": 451,
       "views": 659175,
       "spread": 77,
       "top5": 0.41,
       "legacy": 1680
     },
     {
-      "d": "2026-11-20",
+      "d": "2026-11-21",
       "region": "중화권",
-      "rooms": 31,
+      "rooms": 59,
       "views": 14017,
       "spread": 64,
       "top5": 0.44,
       "legacy": 465
     },
     {
-      "d": "2026-11-20",
+      "d": "2026-11-21",
       "region": "한국",
-      "rooms": 430,
+      "rooms": 453,
       "views": 181494,
       "spread": 90,
       "top5": 0.51,
@@ -562,14 +562,14 @@ window.TOPTOON_DATA = {
     }
   ],
   "rankSnapshot": {
-    "d": "2026-11-20",
+    "d": "2026-11-21",
     "region": "한국",
     "maxCharId": 10000135,
     "items": [
       {
         "rank": 1,
-        "name": "이해진",
-        "id": 10000083,
+        "name": "민서",
+        "id": 10000131,
         "type": "character"
       },
       {
@@ -580,69 +580,69 @@ window.TOPTOON_DATA = {
       },
       {
         "rank": 3,
+        "name": "최아영",
+        "id": 508,
+        "type": "character"
+      },
+      {
+        "rank": 4,
         "name": "아이돌 매니저의 일지",
         "id": 131,
         "type": "multi"
       },
       {
-        "rank": 4,
-        "name": "한유리",
-        "id": 253,
-        "type": "character"
-      },
-      {
         "rank": 5,
-        "name": "이다은",
-        "id": 10000124,
+        "name": "이해진",
+        "id": 10000083,
         "type": "character"
       },
       {
         "rank": 6,
-        "name": "한서하",
-        "id": 10000095,
-        "type": "character"
-      },
-      {
-        "rank": 7,
-        "name": "한나리",
-        "id": 61,
-        "type": "character"
-      },
-      {
-        "rank": 8,
-        "name": "오유리",
-        "id": 284,
-        "type": "character"
-      },
-      {
-        "rank": 9,
         "name": "한정숙",
         "id": 10000017,
         "type": "character"
       },
       {
-        "rank": 10,
+        "rank": 7,
+        "name": "한서하",
+        "id": 10000095,
+        "type": "character"
+      },
+      {
+        "rank": 8,
+        "name": "이다은",
+        "id": 10000124,
+        "type": "character"
+      },
+      {
+        "rank": 9,
         "name": "신아영",
         "id": 1,
         "type": "character"
       },
       {
-        "rank": 11,
-        "name": "장선영",
-        "id": 100,
-        "type": "character"
-      },
-      {
-        "rank": 12,
+        "rank": 10,
         "name": "김가을",
         "id": 71,
         "type": "character"
       },
       {
-        "rank": 13,
-        "name": "한유라",
-        "id": 314,
+        "rank": 11,
+        "name": "한나리",
+        "id": 61,
         "type": "character"
+      },
+      {
+        "rank": 12,
+        "name": "장선영",
+        "id": 100,
+        "type": "character"
+      },
+      {
+        "rank": 13,
+        "name": "건물마다 컨셉이 다름",
+        "id": 5,
+        "type": "multi"
       },
       {
         "rank": 14,
@@ -652,14 +652,14 @@ window.TOPTOON_DATA = {
       },
       {
         "rank": 15,
-        "name": "박하나",
-        "id": 10000135,
+        "name": "한유라",
+        "id": 314,
         "type": "character"
       },
       {
         "rank": 16,
-        "name": "유은정",
-        "id": 10000110,
+        "name": "고유미",
+        "id": 258,
         "type": "character"
       },
       {
@@ -670,200 +670,200 @@ window.TOPTOON_DATA = {
       },
       {
         "rank": 18,
-        "name": "이예린",
-        "id": 72,
-        "type": "character"
-      },
-      {
-        "rank": 19,
-        "name": "박유미",
-        "id": 249,
-        "type": "character"
-      },
-      {
-        "rank": 20,
-        "name": "여사친은 SOLO",
-        "id": 122,
-        "type": "multi"
-      },
-      {
-        "rank": 21,
-        "name": "이하영",
-        "id": 10000053,
-        "type": "character"
-      },
-      {
-        "rank": 22,
-        "name": "강미애",
-        "id": 10000116,
-        "type": "character"
-      },
-      {
-        "rank": 23,
-        "name": "배현주",
-        "id": 76,
-        "type": "character"
-      },
-      {
-        "rank": 24,
-        "name": "물이 넘쳐요",
-        "id": 150,
-        "type": "multi"
-      },
-      {
-        "rank": 25,
-        "name": "동아리",
-        "id": 108,
-        "type": "multi"
-      },
-      {
-        "rank": 26,
-        "name": "결정사",
-        "id": 112,
-        "type": "multi"
-      },
-      {
-        "rank": 27,
-        "name": "도예은",
-        "id": 262,
-        "type": "character"
-      },
-      {
-        "rank": 28,
-        "name": "정은애",
-        "id": 221,
-        "type": "character"
-      },
-      {
-        "rank": 29,
-        "name": "최도희",
-        "id": 10000123,
-        "type": "character"
-      },
-      {
-        "rank": 30,
-        "name": "고유미",
-        "id": 258,
-        "type": "character"
-      },
-      {
-        "rank": 31,
-        "name": "박채원",
-        "id": 118,
-        "type": "character"
-      },
-      {
-        "rank": 32,
-        "name": "은혜",
-        "id": 129,
-        "type": "character"
-      },
-      {
-        "rank": 33,
-        "name": "레베카",
-        "id": 10000055,
-        "type": "character"
-      },
-      {
-        "rank": 34,
-        "name": "김민지",
-        "id": 256,
-        "type": "character"
-      },
-      {
-        "rank": 35,
         "name": "윤하린",
         "id": 377,
         "type": "character"
       },
       {
-        "rank": 36,
-        "name": "유정원",
-        "id": 229,
+        "rank": 19,
+        "name": "박채원",
+        "id": 118,
         "type": "character"
       },
       {
-        "rank": 37,
-        "name": "박아영",
-        "id": 10000071,
+        "rank": 20,
+        "name": "윤희",
+        "id": 10000068,
         "type": "character"
       },
       {
-        "rank": 38,
-        "name": "유달리",
-        "id": 89,
-        "type": "character"
-      },
-      {
-        "rank": 39,
-        "name": "최아영",
-        "id": 508,
-        "type": "character"
-      },
-      {
-        "rank": 40,
-        "name": "정소은",
-        "id": 132,
-        "type": "character"
-      },
-      {
-        "rank": 41,
-        "name": "일진녀들과 무인도에서 살아남기",
-        "id": 101,
-        "type": "multi"
-      },
-      {
-        "rank": 42,
-        "name": "빵녀",
-        "id": 115,
-        "type": "multi"
-      },
-      {
-        "rank": 43,
+        "rank": 21,
         "name": "아줌마는 SOLO",
         "id": 114,
         "type": "multi"
       },
       {
-        "rank": 44,
-        "name": "동경하던 유부녀가 개변태였다",
-        "id": 119,
+        "rank": 22,
+        "name": "일진녀들과 무인도에서 살아남기",
+        "id": 101,
         "type": "multi"
       },
       {
-        "rank": 45,
-        "name": "정인하",
-        "id": 10000014,
+        "rank": 23,
+        "name": "정소은",
+        "id": 132,
         "type": "character"
       },
       {
-        "rank": 46,
+        "rank": 24,
+        "name": "박하나",
+        "id": 10000135,
+        "type": "character"
+      },
+      {
+        "rank": 25,
+        "name": "유은정",
+        "id": 10000110,
+        "type": "character"
+      },
+      {
+        "rank": 26,
+        "name": "신윤주",
+        "id": 10000029,
+        "type": "character"
+      },
+      {
+        "rank": 27,
         "name": "백가인",
         "id": 177,
         "type": "character"
       },
       {
+        "rank": 28,
+        "name": "이하영",
+        "id": 10000053,
+        "type": "character"
+      },
+      {
+        "rank": 29,
+        "name": "다희",
+        "id": 315,
+        "type": "character"
+      },
+      {
+        "rank": 30,
+        "name": "이예린",
+        "id": 72,
+        "type": "character"
+      },
+      {
+        "rank": 31,
+        "name": "이지연",
+        "id": 182,
+        "type": "character"
+      },
+      {
+        "rank": 32,
+        "name": "한서윤",
+        "id": 10000030,
+        "type": "character"
+      },
+      {
+        "rank": 33,
+        "name": "최도희",
+        "id": 10000123,
+        "type": "character"
+      },
+      {
+        "rank": 34,
+        "name": "물이 넘쳐요",
+        "id": 150,
+        "type": "multi"
+      },
+      {
+        "rank": 35,
+        "name": "한채원",
+        "id": 10000027,
+        "type": "character"
+      },
+      {
+        "rank": 36,
+        "name": "정은미",
+        "id": 10000056,
+        "type": "character"
+      },
+      {
+        "rank": 37,
+        "name": "김고은",
+        "id": 133,
+        "type": "character"
+      },
+      {
+        "rank": 38,
+        "name": "정은애",
+        "id": 221,
+        "type": "character"
+      },
+      {
+        "rank": 39,
+        "name": "수애",
+        "id": 504,
+        "type": "character"
+      },
+      {
+        "rank": 40,
+        "name": "동아리",
+        "id": 108,
+        "type": "multi"
+      },
+      {
+        "rank": 41,
+        "name": "마법소녀 마누라",
+        "id": 102,
+        "type": "multi"
+      },
+      {
+        "rank": 42,
+        "name": "유정원",
+        "id": 229,
+        "type": "character"
+      },
+      {
+        "rank": 43,
+        "name": "서나리",
+        "id": 73,
+        "type": "character"
+      },
+      {
+        "rank": 44,
+        "name": "이선경",
+        "id": 10000044,
+        "type": "character"
+      },
+      {
+        "rank": 45,
+        "name": "김민지",
+        "id": 256,
+        "type": "character"
+      },
+      {
+        "rank": 46,
+        "name": "엄자영",
+        "id": 139,
+        "type": "character"
+      },
+      {
         "rank": 47,
-        "name": "강수연",
-        "id": 2,
+        "name": "강미연",
+        "id": 10000054,
         "type": "character"
       },
       {
         "rank": 48,
-        "name": "정희진",
-        "id": 505,
+        "name": "차수민",
+        "id": 97,
         "type": "character"
       },
       {
         "rank": 49,
-        "name": "마음만큼은 네 거야",
-        "id": 10000061,
+        "name": "윤혜윤",
+        "id": 8,
         "type": "character"
       },
       {
         "rank": 50,
-        "name": "정은미",
-        "id": 10000056,
+        "name": "정인하",
+        "id": 10000014,
         "type": "character"
       }
     ]
@@ -1241,6 +1241,11 @@ window.TOPTOON_DATA = {
     },
     {
       "d": "2026-11-20",
+      "chars": 10000135,
+      "note": "랭킹 페이지 최대 캐릭터 ID 기준 (하한값)"
+    },
+    {
+      "d": "2026-11-21",
       "chars": 10000135,
       "note": "랭킹 페이지 최대 캐릭터 ID 기준 (하한값)"
     }
